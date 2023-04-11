@@ -10,19 +10,16 @@ export default function App() {
 
   useEffect(() => {
     (async () => {
-      const { status } = await BarCodeScanner.requestPermissionsAsync();
-      setHasPermission(status === 'granted');
+      const { granted } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(granted);
     })();
   }, []);
 
-  const OpenURLButton = ({url, style, children}) => {
+  const OpenURLButton = ({url, children}) => {
     const handlePress = useCallback(async () => {
-      // Checking if the link is supported for links with custom URL scheme.
-      const supported = await Linking.canOpenURL(url);
+      // const supported = await Linking.canOpenURL(url);
   
       if (supported) {
-        // Opening the link with some app, if the URL scheme is "http" the web link should be opened
-        // by some browser in the mobile
         await Linking.openURL(url);
       } else {
         Alert.alert(`Don't know how to open this URL: ${url}`);
@@ -42,10 +39,10 @@ export default function App() {
   };
 
   if (hasPermission === null) {
-    return <Text>Solicitando permissão para usar a câmera</Text>;
+    return <Text style={styles.texto}>Solicitando permissão para usar a câmera</Text>;
   }
   if (hasPermission === false) {
-    return <Text>Acesso negado à câmera</Text>;
+    return <Text style={styles.texto}>Acesso negado à câmera</Text>;
   }
 
   return (
@@ -80,5 +77,11 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     alignSelf: 'center'
   },
+  texto: {
+    fontSize: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center'
+  }
 });
 
