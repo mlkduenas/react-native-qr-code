@@ -14,20 +14,20 @@ export default function Home({navigation}){
 
 const styles = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: '#fff',
-      alignItems: 'center',
-      justifyContent: 'center',
+		flex: 1,
+		backgroundColor: '#fff',
+		alignItems: 'center',
+		justifyContent: 'center',
     },
     data: {
-      fontSize: 20,
-      marginVertical: 10,
-      alignSelf: 'center'
+		fontSize: 20,
+		marginVertical: 10,
+		alignSelf: 'center'
     },
     texto: {
-      fontSize: 30,
-      alignItems: 'center',
-      justifyContent: 'center',
-      alignSelf: 'center'
+		fontSize: 30,
+		alignItems: 'center',
+		justifyContent: 'center',
+		alignSelf: 'center'
     }
   });
