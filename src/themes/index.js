@@ -3,7 +3,7 @@ export default {
         brand: {
             verde: '#09EAB4',
             verdeEscuro: '#0C3C4C',
-            verdeClaro: '#93FCEC'
+            verdeClaro: '#8998d9'
         },
         neutral: {
             background: '#282a36',

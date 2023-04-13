@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, Linking, Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import * as ImagePicker from 'expo-image-picker';
 import BotaoFlutuante from '../components/BotaoFlutuante';
+import themes from '../themes'
 
 
 export default function Scanner({navigation}) {

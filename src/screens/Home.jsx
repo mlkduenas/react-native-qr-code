@@ -1,11 +1,16 @@
 import React from 'react'
-import { StyleSheet, View, Text, Alert } from 'react-native'
+import { StyleSheet, View, Text, Image, Alert } from 'react-native'
 import BotaoFlutuante from '../components/BotaoFlutuante'
+import themes from '../themes'
 
 export default function Home({navigation}){
     return (
-        <View>
-            <Text style={styles.texto}>Menu Principal</Text>
+        <View style={{backgroundColor: themes.colors.brand.verdeClaro}}>  
+            <Text style={styles.texto}>SCANdinavia</Text>
+            <Image
+              source={require('../../assets/viking128px.png')}
+              style={styles.button}
+            />
             <BotaoFlutuante onPress={()=> navigation.navigate("Scanner")}
                             icon="qrcode-scan" size={100} style={styles.button}/>
         </View>
@@ -31,7 +36,7 @@ const styles = StyleSheet.create({
       alignSelf: 'center'
     },
     button: {
-        position: 'absolute',
+        //position: 'absolute',
         margin: 50,
         borderRadius: 32,
         justifyContent: 'center',
