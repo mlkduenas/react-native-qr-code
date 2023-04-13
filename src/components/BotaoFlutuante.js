@@ -3,25 +3,12 @@ import { TouchableOpacity, StyleSheet } from "react-native"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import themes from "../themes"
 
-const BotaoFlutuante =({onPress, icon}) => (
-    <TouchableOpacity style={styles.button}
+const BotaoFlutuante =({onPress, icon, size, style}) => (
+    <TouchableOpacity style={style}
         onPress={onPress} icon={icon}>
-        <MaterialCommunityIcons name={icon} size={100}
+        <MaterialCommunityIcons name={icon} size={size}
             color={themes.colors.neutral.background} />
     </TouchableOpacity>
 )
-
-const styles = StyleSheet.create({
-    button: {
-        position: 'absolute',
-        margin: 50,
-        borderRadius: 32,
-        // width: 64,
-        // height: 64,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'center'
-    }
-})
 
 export default BotaoFlutuante

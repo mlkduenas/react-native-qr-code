@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, Button, Linking, Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import * as ImagePicker from 'expo-image-picker';
+import BotaoFlutuante from '../components/BotaoFlutuante';
+
 
 export default function Scanner({navigation}) {
 	const [hasPermission, setHasPermission] = useState(false);
@@ -14,6 +17,26 @@ export default function Scanner({navigation}) {
 			setHasPermission(granted);
 		})();
 	}, []);
+
+	const pickImage = async () => {
+		let result = await ImagePicker.launchImageLibraryAsync({
+			mediaTypes: ImagePicker.MediaTypeOptions.All,
+			// allowsEditing: true,
+			// aspect: [4, 3],
+			quality: 1,
+		});
+
+		console.log(result.assets[0].uri);
+		console.log(typeof(result.assets[0].uri))
+
+		if (!result.canceled) {
+			let cu = await BarCodeScanner.scanFromURLAsync(result.assets[0].uri)
+			const porra = await Linking.canOpenURL(cu[0].data);
+			setSupported(porra);
+			setScanned(true);
+			setData(cu[0].data);
+		}
+	};
 
 	const OpenURLButton = ({url, children}) => {
 		const handlePress = useCallback(async () => {
@@ -31,8 +54,10 @@ export default function Scanner({navigation}) {
 
 	const handleBarCodeScanned = ({ type, data }) => {
 		(async () => {
-		const porra = await Linking.canOpenURL(data);
-		setSupported(porra);})()
+			console.log(data)	
+			const porra = await Linking.canOpenURL(data);
+			setSupported(porra);
+		})()
 		
 		setScanned(true);
 		setData(data);
@@ -59,7 +84,9 @@ export default function Scanner({navigation}) {
 			<Button title={'Escanear novamente'} onPress={() => setScanned(false)} />
 			</View>
 		) : (
-			<BarCodeScanner onBarCodeScanned={handleBarCodeScanned} style={StyleSheet.absoluteFillObject} />
+			<BarCodeScanner onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} style={StyleSheet.absoluteFillObject}>
+				<BotaoFlutuante onPress={pickImage} icon="file-find-outline" size={50}></BotaoFlutuante>
+			</BarCodeScanner>
 		)}
 		</View>
 	);
